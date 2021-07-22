@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int ans;
+
+void go(unsigned int day, int sum, vector<int> &t, vector<int> &p, int &ans)
+{
+	unsigned int n = t.size();
+
+	if (day > n) return;
+
+	if (day == n)
+	{
+		if (ans <= sum) ans = sum;
+		return;
+	}
+
+	go(day + t[day], sum + p[day], t, p, ans);
+	go(day + 1, sum, t, p, ans);
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	vector<int> t(n);
+	vector<int> p(n);
+
+	for (int i = 0; i < n; i++)
+		cin >> t[i] >> p[i];
+
+	go(0, 0, t, p, ans);
+
+	cout << ans << '\n';
+
+	return 0;
+}

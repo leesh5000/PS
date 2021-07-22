@@ -1,0 +1,22 @@
+import sys
+from collections import deque
+n = int(input())
+m = int(input())
+graph = [[] for _ in range(n+1)]
+for _ in range(m):
+    u, v = map(int, input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+cnt = 0
+stack = deque()
+stack.append(1)
+ck = [0] * (n+1)
+while stack:
+    current = stack.pop()
+    if ck[current] == 1:
+        continue
+    ck[current] = 1
+    cnt += 1
+    for next in graph[current]:
+        stack.append(next)
+print(cnt-1)
