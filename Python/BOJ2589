@@ -1,0 +1,27 @@
+import sys
+import copy
+from collections import deque
+input = sys.stdin.readline
+R, C = map(int, input().split())
+board = [list(map(str, input().strip())) for _ in range(R)]
+origin_dist = [[0] * C for _ in range(R)]
+dQ = deque()
+dr = [-1, 0, 1, 0]
+dc = [0, 1, 0, -1]
+ans = -2147000000
+for i in range(R):
+    for j in range(C):
+        if board[i][j] == 'L':
+            dist = copy.deepcopy(board)
+            dQ.append((i, j))
+            dist[i][j] = 0
+            while dQ:
+                cur_r, cur_c = dQ.popleft()
+                for k in range(4):
+                    next_r = cur_r+dr[k]
+                    next_c = cur_c+dc[k]
+                    if 0 <= next_r < R and 0 <= next_c < C and dist[next_r][next_c] == 'L':
+                        dQ.append((next_r, next_c))
+                        dist[next_r][next_c] = dist[cur_r][cur_c] + 1
+                        ans = max(ans, dist[next_r][next_c])
+print(ans if ans != -2147000000 else 0)
