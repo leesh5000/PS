@@ -7,7 +7,7 @@ board = [list(map(str, input().strip())) for _ in range(R)]
 origin_dist = [[0] * C for _ in range(R)]
 dQ = deque()
 dr = [-1, 0, 1, 0]
-dc = [0, 1, 0, -1]
+dc = [0, 1, 0, -1]s
 ans = -2147000000
 for i in range(R):
     for j in range(C):
